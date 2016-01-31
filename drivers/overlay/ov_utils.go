@@ -55,9 +55,10 @@ func createVxlan(name string, vni uint32) error {
 		VxlanId:   int(vni),
 		Learning:  true,
 		Port:      int(nl.Swap16(vxlanPort)), //network endian order
-		Proxy:     true,
+		UDPCSum:   true,
 		L3miss:    true,
 		L2miss:    true,
+		Proxy:     true,
 	}
 
 	if err := netlink.LinkAdd(vxlan); err != nil {
